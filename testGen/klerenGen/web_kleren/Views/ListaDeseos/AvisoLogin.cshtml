@@ -1,0 +1,36 @@
+﻿@{
+    ViewData["Title"] = "Aviso Login | Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- Cuerpo de la pagina principal -->
+
+ <div class="container">
+    <main role="main" class="pb-3  p-5">
+         <div class="text-center">
+             <h1 class="display-4">Favoritos</h1>
+             <h2 class="display-6">¡Atención!</h2>
+             <p class="p-2 pb-1">Para acceder a tu lista de deseos debes iniciar sesión.</p>
+             <a asp-controller="Usuario" asp-action="Login" method="post" class="d-inline btn btn-primary">Iniciar Sesión</a>
+            <p class="p-2">¿No tienes cuenta? <a asp-controller="Usuario" asp-action="Registro" class="text-primary">Regístrate</a></p>
+         </div>
+     </main>
+ </div> 
+
+
+
+

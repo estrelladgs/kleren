@@ -1,0 +1,90 @@
+﻿@model IEnumerable<web_kleren.Models.ArticuloViewModel>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Promocion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PrecioOferta)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Trazabilidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Categoria)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Sexo)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Composicion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Parte)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Favorito)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Promocion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PrecioOferta)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Trazabilidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Categoria)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Sexo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Composicion)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Parte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Favorito)
+            </td>
+            <td>
+                @Html.ActionLink("Editar articulo", "Edit", new { id=item.ArticuloId }) |
+                @Html.ActionLink("Ver detalles", "Details", new { id = item.ArticuloId }) |
+                @Html.ActionLink("Eliminar", "Delete", new { id = item.ArticuloId }) |
+                @Html.ActionLink("Ver imagenes", "Index", new { id = item.ArticuloId, controller = "ImagenVariante" })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

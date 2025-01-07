@@ -1,0 +1,43 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Aviso Registrado | Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- Cuerpo de la pagina principal -->
+<div class="container">
+ 
+        <h1 class="display-4 m-2 text-center">¡Muchas gracias por tu interés!</h1>
+    
+        <main role="main" class="pb-3 text-center">
+            <a asp-controller="Articulo" asp-action="Home" class="d-inline btn btn-primary">
+                Volver al menú principal
+            </a>
+        </main>
+
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+

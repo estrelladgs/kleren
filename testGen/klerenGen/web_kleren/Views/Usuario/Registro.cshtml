@@ -1,0 +1,75 @@
+﻿@model web_kleren.Models.RegistroUsuarioViewModel
+
+@{
+    ViewData["Title"] = "Registro";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="d-flex align-items-center justify-content-center mt-5 mb-5">
+    <div class="card p-4 shadow-lg mx-3" style="width: 100%; max-width: 600px; margin: 20px;">
+        <h1 class="text-center">Registro</h1>
+        <p class="text-center text-muted" style="margin-bottom:10px;">Los campos marcados con <span class="text-danger">(*)</span> son obligatorios.</p>
+
+        <form asp-action="Registro">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label">
+                    Nombre <span class="text-danger">*</span>
+                </label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Apellidos" class="control-label">
+                    Apellidos <span class="text-danger">*</span>
+                </label>
+                <input asp-for="Apellidos" class="form-control" />
+                <span asp-validation-for="Apellidos" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Correo" class="control-label">
+                    Correo <span class="text-danger">*</span>
+                </label>
+                <input asp-for="Correo" class="form-control" />
+                <span asp-validation-for="Correo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Telefono" class="control-label">
+                    Teléfono <span class="text-danger">*</span>
+                </label>
+                <input asp-for="Telefono" class="form-control" />
+                <span asp-validation-for="Telefono" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FNac" class="control-label">
+                    Fecha de nacimiento <span class="text-danger">*</span>
+                </label>
+                <input asp-for="FNac" type="date" class="form-control" />
+                <span asp-validation-for="FNac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Pass" class="control-label">
+                    Contraseña <span class="text-danger">*</span>
+                </label>
+                <input asp-for="Pass" type="password" class="form-control" />
+                <span asp-validation-for="Pass" class="text-danger"></span>
+            </div>
+
+            <!-- Texto con enlace a iniciar sesión -->
+            <div class="text-center my-3">
+                <span>¿Ya tienes cuenta? <a asp-controller="Usuario" asp-action="Login" class="text-primary">Inicia sesión</a></span>
+            </div>
+
+            <div class="form-group text-center">
+                <button type="submit" class="btn btn-primary w-100">Registrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

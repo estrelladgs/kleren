@@ -1,0 +1,18 @@
+﻿@model web_kleren.Models.AdministradorViewModel 
+
+<div class="card" id="misDatosCard">
+    <div class="card-body">
+        <h4 class="card-title">Mis Datos</h4>
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Apellidos:</strong> @Model.Apellidos</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+        <p><strong>Teléfono:</strong> @Model.Telefono</p>
+        <p><strong>DNI:</strong> @Model.Dni</p>
+        <!-- <p><strong>Fecha de Nacimiento:</strong> @Model.FNac</p> -->
+    </div>
+    <div class="card-footer text-center">
+        <button id="btnModificarDatos" data-url="@Url.Action("ModificarDatosPartial", "Administrador")" class="btn btn-primary">Modificar Datos</button>
+        <button id="btnModificarContra" data-url="@Url.Action("_ModificarContra", "Administrador")" class="btn btn-secondary">Modificar Contraseña</button>
+
+    </div>
+</div>

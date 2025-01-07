@@ -1,0 +1,10 @@
+﻿@{
+    ViewData["Title"] = "Éxito al modificar la contraseña";
+}
+
+<div class="alert alert-success" role="alert">
+    <h4 class="alert-heading">¡Contraseña modificada con éxito!</h4>
+    <p>Tu contraseña ha sido actualizada correctamente. Ahora puedes usar la nueva contraseña para iniciar sesión.</p>
+    <hr>
+    <p class="mb-0">Si deseas volver a la página de mis datos, haz clic en el siguiente enlace:</p>
+    <button id="btnCancelar" data-url="@Url.Action("MisDatosPartial", "Usuario")" class="btn btn-secondary">Volver</button>

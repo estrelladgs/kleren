@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				
+<joined-subclass name="ParteArribaNH" extends="KlerenGen.Infraestructure.EN.Kleren.TallaNH" table="ParteArriba"> 
+	<key>
+    	
+				<column name="tallaId"/>
+		
+    	
+   	</key>
+
+			
+					
+					<property name="Pecho" type="integer"> 
+						<column name="pecho"  not-null="true"/>
+					</property>
+					<property name="Largo" type="integer"> 
+						<column name="largo"  not-null="true"/>
+					</property>
+					<property name="Hombros" type="integer"> 
+						<column name="hombros"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+					
+					
+					
+		
+ 	  
+		 </joined-subclass>
+		  
+		  <query name="ParteArribaNHReadAllHQL">from ParteArribaNH</query>
+		</hibernate-mapping>
+	

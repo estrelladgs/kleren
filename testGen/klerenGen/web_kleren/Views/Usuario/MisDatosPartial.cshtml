@@ -1,0 +1,18 @@
+﻿@model web_kleren.Models.UsuarioViewModel
+
+<div class="card" id="misDatosCard">
+    <div class="card-body">
+        <h4 class="card-title">Mis Datos</h4>
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Apellidos:</strong> @Model.Apellidos</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+        <p><strong>Teléfono:</strong> @Model.Telefono</p>
+        @*<p><strong>Fecha de Nacimiento:</strong> @(Model.FNac.HasValue ? Model.FNac.Value.ToString("dd/MM/yyyy") : "No proporcionada")</p>*@
+    </div>
+    <div class="card-footer text-center">
+        <button id="btnModificarDatos" data-url="@Url.Action("ModificarDatosPartial", "Usuario")" class="btn btn-primary">Modificar Datos</button>
+        <button id="btnModificarContra" data-url="@Url.Action("_ModificarContra", "Usuario")" class="btn btn-secondary">Modificar Contraseña</button>
+        <button id="btnBorrarCuenta" data-url="@Url.Action("_BorrarCuenta", "Usuario")" class="btn btn-danger">Borrar Cuenta</button>
+
+    </div>
+</div>

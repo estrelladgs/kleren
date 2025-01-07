@@ -1,0 +1,50 @@
+﻿@model web_kleren.Models.PedidoViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">Tramitar Devolución</h5>
+</div>
+<div class="modal-body">
+    <p>Vas a proceder a tramitar la devolución de tu pedido con ID <strong>@Model.PedidoId</strong>.</p>
+    <p>
+        Deberás empaquetar los artículos pegando en el embalaje la etiqueta de devolución que se incluyó en el pedido.
+        Un repartidor acudirá a la dirección a la que se envió el pedido en 3-4 días laborables.
+    </p>
+</div>
+<div class="modal-footer">
+    <!-- Formulario para enviar el POST -->
+    <form asp-action="_TramitarDevolucion" id="devolucionForm" method="post">
+        <input type="hidden" name="PedidoId" value="@Model.PedidoId" />
+        <button type="submit" class="btn btn-primary" id="btnAceptarDevolucion">
+            Tramitar
+        </button>
+    </form>
+
+    <!-- Botón de Cancelar -->
+    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btnCancelarDevolucion">
+        Cancelar
+    </button>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#devolucionForm").submit(function (e) {
+            e.preventDefault(); // Prevenir el envío normal del formulario
+
+            $.ajax({
+                url: '@Url.Action("_TramitarDevolucion")', // URL de tu método en el controlador
+                type: 'POST',
+                data: $(this).serialize(), // Serializa los datos del formulario
+                success: function (response) {
+                    $("#contenidoPerfil").html(response);
+                    // Oculta el formulario de tramitación
+                    $("#tramitarDevolucion").hide();
+                },
+                error: function () {
+                    alert("Ocurrió un error al tramitar la devolución. Inténtalo de nuevo.");
+                }
+            });
+        });
+    });
+</script>

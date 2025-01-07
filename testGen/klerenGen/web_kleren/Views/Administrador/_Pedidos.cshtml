@@ -1,0 +1,32 @@
+﻿@model IEnumerable<web_kleren.Models.PedidoViewModel>
+
+<h2>Pedidos</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID Pedido</th>
+            <th>Correo Usuario</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var pedido in Model)
+        {
+            <tr>
+                <td>
+                    @pedido.PedidoId
+                </td>
+                <td>
+                    @pedido.Correo
+                </td>
+                <td>
+                    <form asp-action="ActualizarEstadoPedido" method="post">
+                        <input type="hidden" name="pedidoId" value="@pedido.PedidoId" />
+                        <button type="submit" class="btn btn-link">@pedido.Estado</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

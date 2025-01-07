@@ -1,0 +1,24 @@
+﻿@model IEnumerable<web_kleren.Models.DevolucionViewModel>
+
+<ul class="list-group">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var devolucion in Model)
+        {
+            <li class="list-group-item">
+                <div>
+                    <strong>Total:</strong> @devolucion.Total<br />
+                    <strong>Id:</strong> @devolucion.DevolucionId
+                </div>
+                <div class="mt-2">
+                    <!-- Botón para ver el pedido -->
+                    <button id="btnVerDev" data-url="@Url.Action("_VerDetalleDev", new { id = devolucion.DevolucionId })" class="btn btn-info">Ver Devolucion</button>
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <p>No tienes devoluciones registradas.</p>
+    }
+</ul>

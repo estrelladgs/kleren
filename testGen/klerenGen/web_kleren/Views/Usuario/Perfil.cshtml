@@ -1,0 +1,36 @@
+﻿@model web_kleren.Models.UsuarioViewModel
+
+@{
+    ViewData["Title"] = "Perfil";
+    Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="row" style="display: flex; flex-wrap: wrap;">
+        <!-- Sidebar a la izquierda -->
+        <div class="col-md-3" style="display: flex; flex-direction: column;">
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action" data-url="@Url.Action("MisDatosPartial", "Usuario")">Mis Datos</a>
+                <a href="#" class="list-group-item list-group-item-action" data-url="@Url.Action("_ComprasYDevoluciones", "Usuario")">Compras y Devoluciones</a>
+
+                <a href="#" class="list-group-item list-group-item-action" data-url="@Url.Action("_MisMedidas", "Usuario")">Mis Medidas</a>
+                <a asp-controller="Usuario" asp-action="CerrarSesion" class="list-group-item list-group-item-action text-danger">Cerrar Sesión</a>
+            </div>
+        </div>
+
+        <!-- Contenido dinámico a la derecha -->
+        <div class="col-md-9" style="display: flex; flex-direction: column; justify-content: flex-start;">
+            <div id="contenidoPerfil">
+                <p>¡Nos alegramos de verte!</p>
+                <p>Esperamos que tengas un buen día.</p>
+                <!-- Aquí se cargará el contenido dinámico -->
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="~/js/perfil.js"></script>
+}

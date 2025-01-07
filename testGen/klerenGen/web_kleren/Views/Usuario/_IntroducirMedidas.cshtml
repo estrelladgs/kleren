@@ -1,0 +1,78 @@
+﻿@model web_kleren.Models.MedidasViewModel
+
+<div class="card" id="misDatosCard">
+    <div class="card-body">
+        <h4 class="card-title">Introducir Medidas</h4>
+
+        <!-- Muestra las medidas en campos de entrada para poder modificarlas -->
+        <form id="formIntroducirMedidas" asp-action="_IntroducirMedidas" method="post">
+            <div id="resultadoIntroducirMedidas" class="mb-3"></div>
+
+            <!-- Aquí mostramos los errores generales del modelo -->
+            <div asp-validation-summary="All" class="text-danger"></div>
+
+            <div class="form-group">
+                <label for="Pecho">Pecho:</label>
+                @Html.TextBoxFor(m => m.Pecho, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Pecho, "", new { @class = "text-danger" }) <!-- Error específico de Pecho -->
+            </div>
+
+            <div class="form-group">
+                <label for="LargoBrazo">Largo de brazo:</label>
+                @Html.TextBoxFor(m => m.LargoBrazo, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LargoBrazo, "", new { @class = "text-danger" }) <!-- Error específico de LargoBrazo -->
+            </div>
+
+            <div class="form-group">
+                <label for="Cintura">Cintura:</label>
+                @Html.TextBoxFor(m => m.Cintura, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Cintura, "", new { @class = "text-danger" }) <!-- Error específico de Cintura -->
+            </div>
+
+            <div class="form-group">
+                <label for="Caderas">Caderas:</label>
+                @Html.TextBoxFor(m => m.Caderas, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Caderas, "", new { @class = "text-danger" }) <!-- Error específico de Caderas -->
+            </div>
+
+            <div class="form-group">
+                <label for="LargoPierna">Largo de pierna:</label>
+                @Html.TextBoxFor(m => m.LargoPierna, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.LargoPierna, "", new { @class = "text-danger" }) <!-- Error específico de LargoPierna -->
+            </div>
+
+            <button type="submit" class="btn btn-success">Guardar</button>
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function () {
+            $(document).on('submit', '#formIntroducirMedidas', function (e) {
+                e.preventDefault(); // Prevenir el envío del formulario
+
+                var $form = $(this);
+                var formData = $form.serialize();
+
+                // Muestra un indicador de carga mientras se procesa la solicitud
+                $("#resultadoIntroducirMedidas").html('<div class="spinner-border text-primary" role="status"><span class="sr-only">Cambiando contraseña...</span></div>');
+
+                $.ajax({
+                    url: $form.attr('action'), // URL de la acción del formulario
+                    type: 'POST',
+                    data: formData, // Datos del formulario serializados
+                    success: function (response) {
+                        console.log("success");
+                        console.log(response);
+                        // Aquí puedes actualizar el contenido según la respuesta
+                        $("#contenidoPerfil").html(response); // Asegúrate de que 'contenidoPerfil' sea el id correcto
+                    },
+                    error: function (xhr, status, error) {
+                        // Elimina el spinner en caso de error y muestra un mensaje de error
+                        $("#misDatosCard").find(".spinner-border").remove();
+                        $("#misDatosCard").prepend('<div class="alert alert-danger">Ocurrió un error. Por favor, intenta nuevamente.</div>');
+                    }
+                });
+            });
+        });
+    </script>
+</div>

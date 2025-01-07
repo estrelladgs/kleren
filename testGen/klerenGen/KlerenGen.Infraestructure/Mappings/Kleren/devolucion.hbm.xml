@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="DevolucionNH" table="Devolucion"> 
+				  	
+						<id name="DevolucionId" column="devolucionIdDevolucion" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+					<property name="MotivoRechazo" type="string"> 
+						<column name="motivoRechazo"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+		  			
+					
+							<many-to-one name="Pedido" class="KlerenGen.Infraestructure.EN.Kleren.PedidoNH" >
+								<column name="FK_pedidoId_idPedido"/> 
+        					</many-to-one>
+					 
+						
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="DevolucionNHReadAllHQL">from DevolucionNH</query>
+		</hibernate-mapping>
+	

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="PorcentajeNH" table="Porcentaje"> 
+				  	
+						<id name="Id" column="idPorcentaje" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Porcentaje" type="float"> 
+						<column name="porcentaje"  not-null="true"/>
+					</property>
+			
+			
+			
+		  			
+						<many-to-one name="Composicion" class="KlerenGen.Infraestructure.EN.Kleren.ComposicionNH" >	
+								<column name="FK_composicionIdComposicion_idComposicion"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="Material" class="KlerenGen.Infraestructure.EN.Kleren.MaterialNH" >	
+								<column name="FK_materialId_idMaterial"/> 
+						</many-to-one>
+											 					
+			
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="PorcentajeNHReadAllHQL">from PorcentajeNH</query>
+		</hibernate-mapping>
+	

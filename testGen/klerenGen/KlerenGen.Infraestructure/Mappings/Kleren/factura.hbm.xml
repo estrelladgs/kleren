@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="FacturaNH" table="Factura"> 
+				  	
+						<id name="FacturaId" column="facturaIdFactura" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Subtotal" type="float"> 
+						<column name="subtotal"  not-null="true"/>
+					</property>
+					<property name="Total" type="float"> 
+						<column name="total"  not-null="true"/>
+					</property>
+					<property name="Fecha" type="date"> 
+						<column name="fecha"  not-null="true"/>
+					</property>
+					<property name="Iva" type="float"> 
+						<column name="iva"  not-null="true"/>
+					</property>
+					<property name="Descuento" type="float"> 
+						<column name="descuento"  not-null="true"/>
+					</property>
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+					<property name="Apellidos" type="string"> 
+						<column name="apellidos"  not-null="true"/>
+					</property>
+					<property name="Email" type="string"> 
+						<column name="email"  not-null="true"/>
+					</property>
+					<property name="Telefono" type="string"> 
+						<column name="telefono"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+		  			
+					
+							<many-to-one name="Pedido" class="KlerenGen.Infraestructure.EN.Kleren.PedidoNH" >
+								<column name="FK_pedidoId_idPedido"/> 
+        					</many-to-one>
+					 
+						
+			
+			
+			
+			
+			
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="FacturaNHReadAllHQL">from FacturaNH</query>
+		</hibernate-mapping>
+	

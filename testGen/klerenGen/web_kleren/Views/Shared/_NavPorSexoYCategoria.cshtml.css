@@ -1,0 +1,29 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.dropdown-menu {
+    width: 500px; 
+    max-width: 80vw; 
+    white-space: normal; 
+}
+
+.dropdown-item {
+    color: #010E18;
+    background-color: none;
+}
+
+.dropdown-item:hover {
+    background-color: #D9BCFE44;
+    color: #351E5C;
+}
+
+.promocion {
+    background-color: white !important;
+    color: #CF463C !important;
+    font-weight: bold !important;
+}
+
+.promocion:hover {
+    background-color: #CF463C44 !important;
+    color: #CF463C !important;
+}

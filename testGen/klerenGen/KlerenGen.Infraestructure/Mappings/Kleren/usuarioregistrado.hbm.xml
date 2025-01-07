@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="UsuarioRegistradoNH" table="UsuarioRegistrado"> 
+				  	
+						<id name="UsuarioRegistradoId" column="usuarioId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+					<property name="Apellidos" type="string"> 
+						<column name="apellidos"  not-null="true"/>
+					</property>
+					<property name="Correo" type="string"> 
+						<column name="correo"  unique="true" not-null="true"/>
+					</property>
+					<property name="Telefono" type="string"> 
+						<column name="telefono"  not-null="true"/>
+					</property>
+					<property name="Fecha_nac" type="date"> 
+						<column name="fecha_nac"  not-null="true"/>
+					</property>
+					<property name="Pass" type="string"> 
+						<column name="pass"  not-null="true"/>
+					</property>
+					<property name="Puntos" type="integer"> 
+						<column name="puntos"  not-null="true"/>
+					</property>
+					<property name="TokenCompartido" type="string"> 
+						<column name="tokenCompartido" />
+					</property>
+			
+			
+			
+			
+			
+			
+			
+		  			
+						<bag name="Resenas" >
+							<key>
+							
+								
+								<column name="FK_usuarioId_idUsuarioRegistrado"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.ResenaNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="ListaDeseos" >
+							<key>
+							
+								
+								<column name="FK_usuarioId_idUsuarioRegistrado"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.ListaDeseosNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Pedido" >
+							<key>
+							
+								
+								<column name="FK_usuarioId_idUsuarioRegistrado"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.PedidoNH"/>
+					    </bag>
+					
+			
+		  			
+					
+							<many-to-one name="MedidasUsuario" class="KlerenGen.Infraestructure.EN.Kleren.MedidasUsuarioNH" >
+								<column name="FK_medidasUsuarioIdMedidasUsuario_idMedidasUsuario"/> 
+        					</many-to-one>
+					 
+						
+			
+			
+		  			
+						<bag name="DirEnvio" >
+							<key>
+							
+								
+								<column name="FK_usuarioId_idUsuarioRegistrado"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.DirEnvioNH"/>
+					    </bag>
+					
+			
+			
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="UsuarioRegistradoNHReadAllHQL">from UsuarioRegistradoNH</query>
+		  <query name="UsuarioRegistradoNHdamePorCorreoHQL"><![CDATA[FROM UsuarioRegistradoNH as usu where usu.Correo = :p_correo]]></query>
+		  <query name="UsuarioRegistradoNHdameArticulosEnListaDeseosHQL"><![CDATA[select art FROM ArticuloNH as art INNER JOIN ListaDeseosNH as lista on art.ArticuloId = lista.Articulo INNER JOIN UsuarioRegistradoNH as u on u.UsuarioRegistradoId = lista.UsuarioRegistrado where u.UsuarioRegistradoId=:p_usuario]]></query>
+		  <query name="UsuarioRegistradoNHdameTokenPorUsuarioHQL"><![CDATA[SELECT TokenCompartido FROM UsuarioRegistradoNH WHERE usuarioRegistradoId = :p_usuario]]></query>
+		</hibernate-mapping>
+	

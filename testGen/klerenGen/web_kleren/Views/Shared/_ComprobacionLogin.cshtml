@@ -1,0 +1,25 @@
+﻿
+@*
+    Comprobacion si el usuario ha iniciado o no sesión para saber que cabecera mostrar.
+*@
+
+@model string
+
+@{
+    ViewData["Title"] = Model;
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}

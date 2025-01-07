@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="ResenaNH" table="Resena"> 
+				  	
+						<id name="ResenaId" column="resenaId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="NumeroEstrellas" > 
+						<column name="numeroEstrellas"  not-null="true"/>
+					</property>
+					<property name="Comentario" type="string"> 
+						<column name="comentario"  not-null="true"/>
+					</property>
+					<property name="Fecha" type="date"> 
+						<column name="fecha"  not-null="true"/>
+					</property>
+			
+			
+		  			
+						<many-to-one name="UsuarioRegistrado" class="KlerenGen.Infraestructure.EN.Kleren.UsuarioRegistradoNH" >	
+								<column name="FK_usuarioId_idUsuarioRegistrado"/> 
+						</many-to-one>
+											 					
+			
+			
+		  			
+						<many-to-one name="Articulo" class="KlerenGen.Infraestructure.EN.Kleren.ArticuloNH" >	
+								<column name="FK_articuloId_idArticulo"/> 
+						</many-to-one>
+											 					
+			
+			
+			
+			
+		  			
+					
+							   <one-to-one name="Imagen" class="KlerenGen.Infraestructure.EN.Kleren.ImagenResenaNH" property-ref="Resena" />							
+					 
+						
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ResenaNHReadAllHQL">from ResenaNH</query>
+		  <query name="ResenaNHdameResenasPorArticuloHQL"><![CDATA[select resena FROM ResenaNH as resena where resena.Articulo.ArticuloId = :p_articulo]]></query>
+		</hibernate-mapping>
+	

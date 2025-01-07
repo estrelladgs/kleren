@@ -1,0 +1,48 @@
+﻿
+.form-control {
+	height: 45px; /* Ajusta la altura de los campos */
+}
+
+.form-group {
+	margin-bottom: 1rem; /* Espaciado entre grupos de campos */
+}
+
+.titulo {
+	font-weight: bold;
+	margin-top: 20px;
+	margin-bottom: 10px;
+}
+.container {
+	min-height: 80vh; /* Ajusta el porcentaje según sea necesario */
+	padding-bottom: 100px; /* Deja espacio para el footer */
+}
+
+
+.checkbox-boton {
+	display: inline-block;
+	padding: 10px 20px;
+	font-size: 16px;
+	color: white;
+	background-color: #D9BCFE; /* Color de fondo original */
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-align: center;
+	transition: background-color 0.3s; /* Transición suave para el fondo */
+}
+
+	.checkbox-boton input[type="checkbox"] {
+		display: none; /* Oculta el checkbox real */
+	}
+
+	.checkbox-boton label {
+		display: inline-block;
+		position: relative;
+		padding-left: 30px; /* Espacio para el checkbox */
+		cursor: pointer;
+		line-height: 20px; /* Alineación de texto */
+	}
+
+	.checkbox-boton input[type="checkbox"]:checked ~ label {
+		color: #351e5c; /* Cambia el color del texto del label cuando el checkbox está marcado */
+	}

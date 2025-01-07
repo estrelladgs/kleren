@@ -1,0 +1,42 @@
+﻿@model web_kleren.Models.ContraViewModel
+
+<div class="card" id="cambiarContraCard">
+    <div class="card-body">
+        <h4 class="card-title">Cambiar Contraseña</h4>
+
+        <!-- Muestra los errores generales del modelo -->
+        <form asp-action="_ModificarContra" method="post" id="formModificarContra">
+            <div id="resultadoModificarContra" class="mb-3"></div> <!-- Contenedor para mensajes de error o éxito -->
+            <!-- Muestra los errores generales del modelo -->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Contraseña Actual -->
+            <div class="form-group">
+                <label for="Pass">Contraseña Actual:</label>
+                @Html.PasswordFor(m => m.Pass, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" }) <!-- Error específico de Contraseña Actual -->
+            </div>
+
+            <!-- Nueva Contraseña -->
+            <div class="form-group">
+                <label for="NuevaContra">Nueva Contraseña:</label>
+                @Html.PasswordFor(m => m.NuevaContra, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.NuevaContra, "", new { @class = "text-danger" }) <!-- Error específico de Nueva Contraseña -->
+            </div>
+
+            <!-- Confirmar Nueva Contraseña -->
+            <div class="form-group">
+                <label for="ConfirmarContra">Confirmar Nueva Contraseña:</label>
+                @Html.PasswordFor(m => m.ConfirmarContra, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.ConfirmarContra, "", new { @class = "text-danger" }) <!-- Error específico de Confirmar Contraseña -->
+            </div>
+
+            <!-- Botones -->
+            <div class="form-group mb-4">
+                <button type="submit" class="btn btn-success">Cambiar Contraseña</button>
+                <!-- Botón Cancelar -->
+                <button id="btnCancelar" data-url="@Url.Action("MisDatosPartial", "Usuario")" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

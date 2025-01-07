@@ -1,0 +1,55 @@
+﻿
+@*
+    Fragmento del nav principal de la web con los enlaces para navegar por sexo y categoria de las prendas
+*@
+
+<div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+    <ul class="navbar-nav flex-grow-1">
+        <!-- Menú desplegable para Mujer -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownMujer" role="button" data-bs-toggle="dropdown" aria-expanded="false">Mujer</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMujer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="abrigo">Abrigos</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="chaqueta">Chaquetas</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="vestido">Vestidos</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="pantalon">Pantalones</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="camisa">Camisas</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="top">Tops</a></li>
+                    </div>
+
+                    <div class="col-md-6">
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="falda">Faldas</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="jersey">Jerséis</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="mujer" asp-route-categoria="sudadera">Sudaderas</a></li>
+                        <li><a class="dropdown-item promocion" href="/Articulo/FiltrarPorPromocion?sexo=mujer">Promociones</a></li>
+                    </div>
+                </div>
+             </ul>
+         </li>
+
+        <!-- Menú desplegable para Hombre -->
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle text-dark" href="#" id="dropdownHombre" role="button" data-bs-toggle="dropdown" aria-expanded="false">Hombre</a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownHombre">
+                <div class="row g-6">
+                    <div class="col-md-6">
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="abrigo">Abrigos</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="chaqueta">Chaquetas</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="traje">Trajes</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="pantalon">Pantalones</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="camisa">Camisas</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="polo">Polos</a></li>
+                    </div>
+                    <div class="col-md-6">
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="camiseta">Camisetas</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="jersey">Jerséis</a></li>
+                        <li><a class="dropdown-item" asp-controller="Articulo" asp-action="FiltrarPorSexoYCategoria" asp-route-sexo="hombre" asp-route-categoria="sudadera">Sudaderas</a></li>
+                        <li><a class="dropdown-item promocion" href="/Articulo/FiltrarPorPromocion?sexo=hombre">Promociones</a></li>
+                    </div>
+                </div>
+            </ul>
+        </li>
+    </ul>
+</div>

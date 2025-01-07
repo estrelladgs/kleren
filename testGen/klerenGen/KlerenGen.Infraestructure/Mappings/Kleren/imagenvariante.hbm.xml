@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="ImagenVarianteNH" table="ImagenVariante"> 
+				  	
+						<id name="ImagenVarianteId" column="attribute" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="RutaArchivo" type="string"> 
+						<column name="rutaArchivo"  not-null="true"/>
+					</property>
+					<property name="TextoAlternativo" type="string"> 
+						<column name="textoAlternativo"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<bag name="Variante" >
+							<key>
+							
+								
+								<column name="FK_attribute_idImagenVariante"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.VarianteNH"/>
+					    </bag>
+					
+			
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ImagenVarianteNHReadAllHQL">from ImagenVarianteNH</query>
+		  <query name="ImagenVarianteNHdameImagenesPorVarianteHQL"><![CDATA[SELECT img FROM VarianteNH var JOIN var.ImagenVariante img WHERE var.VarianteId = :p_variante]]></query>
+		</hibernate-mapping>
+	

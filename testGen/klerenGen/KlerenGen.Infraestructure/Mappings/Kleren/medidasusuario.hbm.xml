@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="MedidasUsuarioNH" table="MedidasUsuario"> 
+				  	
+						<id name="MedidasUsuarioId" column="medidasUsuarioIdMedidasUsuario" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Cintura" type="integer"> 
+						<column name="cintura"  not-null="true"/>
+					</property>
+					<property name="Pecho" type="integer"> 
+						<column name="pecho"  not-null="true"/>
+					</property>
+					<property name="AnchoEspalda" type="integer"> 
+						<column name="anchoEspalda"  not-null="true"/>
+					</property>
+					<property name="Caderas" type="integer"> 
+						<column name="caderas"  not-null="true"/>
+					</property>
+					<property name="LargoBrazo" type="integer"> 
+						<column name="largoBrazo"  not-null="true"/>
+					</property>
+					<property name="LargoPierna" type="integer"> 
+						<column name="largoPierna"  not-null="true"/>
+					</property>
+					<property name="TallaIdealSuperior" type="string"> 
+						<column name="tallaIdealSuperior" />
+					</property>
+					<property name="TallaIdealInferior" type="string"> 
+						<column name="tallaIdealInferior" />
+					</property>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		  			
+					
+							   <one-to-one name="UsuarioRegistrado" class="KlerenGen.Infraestructure.EN.Kleren.UsuarioRegistradoNH" property-ref="MedidasUsuario" />							
+					 
+						
+			
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="MedidasUsuarioNHReadAllHQL">from MedidasUsuarioNH</query>
+		  <query name="MedidasUsuarioNHdameMedidasUsuarioHQL"><![CDATA[select med FROM MedidasUsuarioNH as med where med.UsuarioRegistrado.UsuarioRegistradoId = :p_usuario]]></query>
+		</hibernate-mapping>
+	

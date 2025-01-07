@@ -1,0 +1,13 @@
+﻿
+@*
+    Barra de busqueda por nombre de la web
+*@
+<aside class="d-flex justify-content-end pb-1 me-5 ms-5">
+    <form class="d-flex align-items-center gap-2 w-md-50 w-lg-25 my-2" asp-controller="Articulo" asp-action="FiltrarPorNombre" method="get">
+        <input class="form-control flex-grow-1" type="text" name="nombre" placeholder="Busca por nombre">
+        <button class="btn btn-secondary d-inline-flex align-items-center" type="submit">
+            <i class="fas fa-search me-1"></i>
+            <span class="d-inline">Buscar</span>
+        </button>
+    </form>
+</aside>

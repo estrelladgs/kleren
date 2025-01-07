@@ -1,0 +1,51 @@
+﻿<div class="container mt-4">
+    <!-- Pestañas -->
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" role="presentation">
+            <a class="nav-link active" id="compras-tab" data-bs-toggle="tab" href="#compras" role="tab" aria-controls="compras" aria-selected="true">Compras</a>
+        </li>
+        <li class="nav-item" role="presentation">
+            <a class="nav-link" id="devoluciones-tab" data-bs-toggle="tab" href="#devoluciones" role="tab" aria-controls="devoluciones" aria-selected="false">Devoluciones</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-4" id="myTabContent">
+        <!-- Pestaña de Compras -->
+        <div class="tab-pane fade show active" id="compras" role="tabpanel" aria-labelledby="compras-tab">
+            <div id="comprasContent"></div>
+        </div>
+
+        <!-- Pestaña de Devoluciones -->
+        <div class="tab-pane fade" id="devoluciones" role="tabpanel" aria-labelledby="devoluciones-tab">
+            <div id="devsContent"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        // Cargar contenido de Compras al cargar la página
+        if ($('#compras-tab').hasClass('active')) {
+            if ($('#comprasContent').html().trim() === '') {
+                $('#comprasContent').load('@Url.Action("_Compras")'); // Llama al controlador para cargar el contenido de Compras
+            }
+        }
+
+        // Realizar la solicitud AJAX para cargar el contenido dinámico al cambiar entre pestañas
+        $('#myTab a').on('shown.bs.tab', function (e) {
+            const targetId = $(e.target).attr('id');
+
+            if (targetId === 'compras-tab') {
+                // Cargar el contenido de Compras si aún no está cargado
+                if ($('#comprasContent').html().trim() === '') {
+                    $('#comprasContent').load('@Url.Action("_Compras")');
+                }
+            } else if (targetId === 'devoluciones-tab') {
+                // Cargar el contenido de Devoluciones si aún no está cargado
+                if ($('#devsContent').html().trim() === '') {
+                    $('#devsContent').load('@Url.Action("_Devoluciones")'); // Llama al controlador para cargar el contenido de Devoluciones
+                }
+            }
+        });
+    });
+</script>

@@ -1,0 +1,125 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Guia de tallas| Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="container mt-3">
+    <a href="javascript:history.back();" class="d-inline back-button">
+        <span>&larr; Volver</span>
+    </a>
+</div>
+
+<!-- Cuerpo de la pagina principal -->
+<div class="container">
+    <main role="main" class="pb-3">
+        <div class="text-center">
+            <h2 class="m-2 display-4">Guía de tallas</h2>
+        </div>
+
+        <!-- Sección de Mujer -->
+        <div class="container">
+            <!-- Tabla Partes de Arriba -->
+            <div class="table-title">Partes de arriba</div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Talla</th>
+                        <th>XS</th>
+                        <th>S</th>
+                        <th>M</th>
+                        <th>L</th>
+                        <th>XL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pecho (cm)</td>
+                        <td>80</td>
+                        <td>84</td>
+                        <td>88</td>
+                        <td>92</td>
+                        <td>96</td>
+                    </tr>
+                    <tr>
+                        <td>Hombros (cm)</td>
+                        <td>36</td>
+                        <td>38</td>
+                        <td>40</td>
+                        <td>42</td>
+                        <td>44</td>
+                    </tr>
+                    <tr>
+                        <td>Largo (cm)</td>
+                        <td>58</td>
+                        <td>60</td>
+                        <td>62</td>
+                        <td>64</td>
+                        <td>66</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Tabla Partes de Abajo -->
+            <div class="table-title">Partes de abajo</div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Talla</th>
+                        <th>XS</th>
+                        <th>S</th>
+                        <th>M</th>
+                        <th>L</th>
+                        <th>XL</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cintura (cm)</td>
+                        <td>64</td>
+                        <td>68</td>
+                        <td>72</td>
+                        <td>76</td>
+                        <td>80</td>
+                    </tr>
+                    <tr>
+                        <td>Cadera (cm)</td>
+                        <td>88</td>
+                        <td>92</td>
+                        <td>96</td>
+                        <td>100</td>
+                        <td>104</td>
+                    </tr>
+                    <tr>
+                        <td>Largo (cm)</td>
+                        <td>96</td>
+                        <td>98</td>
+                        <td>100</td>
+                        <td>102</td>
+                        <td>104</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        </div>
+    </main>
+</div>
+
+
+

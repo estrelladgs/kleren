@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="AvisoStockNH" table="AvisoStock"> 
+				  	
+						<id name="AvisoId" column="avisoId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Email" type="string"> 
+						<column name="email"  not-null="true"/>
+					</property>
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+			
+			
+		  			
+						<many-to-one name="Variante" class="KlerenGen.Infraestructure.EN.Kleren.VarianteNH" >	
+								<column name="FK_varianteId_idVariante"/> 
+						</many-to-one>
+											 					
+			
+			
+			
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="AvisoStockNHReadAllHQL">from AvisoStockNH</query>
+		  <query name="AvisoStockNHdamePorVarianteYEstadoHQL"><![CDATA[select aviso FROM AvisoStockNH as aviso inner join VarianteNH as var on var.VarianteId = aviso.Variante and aviso.Variante = :p_variante and aviso.Estado = :p_estado]]></query>
+		</hibernate-mapping>
+	

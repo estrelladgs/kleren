@@ -1,0 +1,87 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+a.navbar-brand {
+    white-space: normal;
+    text-align: center;
+    word-break: break-all;
+}
+
+a {
+    color: #0077cc;
+}
+
+
+.border-top {
+  border-top: 1px solid #e5e5e5;
+}
+.border-bottom {
+    border-bottom: 1px solid #351e5c;
+}
+
+button.accept-policy {
+    font-size: 1rem;
+    line-height: inherit;
+}
+
+.dropdown-menu {
+    width: 500px; 
+    max-width: 80vw; 
+    white-space: normal; 
+}
+
+.dropdown-item {
+    color: #010E18;
+    background-color: none;
+}
+
+.dropdown-item:hover {
+    background-color: #D9BCFE44;
+    color: #351E5C;
+}
+
+.promocion {
+    background-color: white;
+    color: #CF463C;
+    font-weight: bold;
+}
+
+.promocion:hover {
+    background-color: #CF463C44;
+    color: #CF463C;
+}
+
+h1 {
+    font-family: "Crimson Pro", serif;
+    font-optical-sizing: auto;
+    font-weight: 900;
+    font-style: italic; 
+}
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
+
+input:focus, button:focus {
+    outline: none; 
+    box-shadow: none; 
+}
+
+.form-inline{
+padding-right: 10em;
+}
+
+.nav-item i {
+    margin-right: 0.5rem; 
+}
+
+.nav-item a:active,
+.nav-item button:active,
+.btn-link:active{
+    outline: none;
+    box-shadow: none; 
+}

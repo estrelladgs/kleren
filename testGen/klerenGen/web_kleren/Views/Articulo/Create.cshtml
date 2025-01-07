@@ -1,0 +1,84 @@
+﻿@model web_kleren.Models.ArticuloViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Crear</h1>
+
+<h4>Articulo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Promocion" /> @Html.DisplayNameFor(model => model.Promocion)
+                </label>
+            </div>
+            <div class="form-group">
+                <label asp-for="PrecioOferta" class="control-label"></label>
+                <input asp-for="PrecioOferta" class="form-control" />
+                <span asp-validation-for="PrecioOferta" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Trazabilidad" class="control-label"></label>
+                <input asp-for="Trazabilidad" class="form-control" />
+                <span asp-validation-for="Trazabilidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Categoria">Categoría</label>
+                <select asp-for="Categoria" class="form-control" asp-items="@(ViewData["CategoriaOptions"] as IEnumerable<SelectListItem>)">
+                    <option value="">Seleccione una categoría</option>
+                </select>
+                <span asp-validation-for="Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Sexo">Sexo</label>
+                <select asp-for="Sexo" class="form-control" asp-items="@(ViewData["SexoOptions"] as IEnumerable<SelectListItem>)">
+                    <option value="">Seleccione el sexo</option>
+                </select>
+                <span asp-validation-for="Sexo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Composicion" class="control-label"></label>
+                <input asp-for="Composicion" class="form-control" />
+                <span asp-validation-for="Composicion" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Parte">Parte</label>
+                <select asp-for="Parte" class="form-control" asp-items="@(ViewData["ParteOptions"] as IEnumerable<SelectListItem>)">
+                    <option value="">Seleccione una parte</option>
+                </select>
+                <span asp-validation-for="Parte" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+                <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Favorito" /> @Html.DisplayNameFor(model => model.Favorito)
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

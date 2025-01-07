@@ -1,0 +1,78 @@
+﻿@model IEnumerable<web_kleren.Models.ArticuloViewModel>
+
+@{
+    ViewData["Title"] = "Mis favoritos | Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- Cuerpo de la pagina principal -->
+
+<aside class="d-flex justify-content-end pb-1 me-5 ms-5 mt-1">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalCompartir">Compartir lista de deseos</button>
+</aside>
+
+<div class="modal fade" id="modalCompartir" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Compartir lista de deseos</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" id="enlace">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer" id="botonera">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-primary" id="generarEnlace">Generar enlace</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+
+    <main role="main" class="pb-3">
+        <div class="text-center">
+
+            @if (Model.Count() > 0)
+            {
+                <h1 class="display-4" id="tituloPagina">Mis favoritos</h1>
+            }
+            else
+            {
+                <h1 class="display-4" id="tituloPagina">¡Vaya! Aún no has añadido nada a tus favoritos</h1>
+            }
+
+            
+            <div class="row" id="misFavoritos">
+                @foreach (var item in Model)
+                {
+                        @Html.Partial("_ArticuloVistaPrevia", item)
+                }
+            </div>
+        </div>
+    </main>
+</div>
+
+
+

@@ -1,0 +1,30 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.color-selector {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.color-radio {
+    display: none; /* Oculta los radios */
+}
+
+.color-circle {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    border: 2px solid #ccc; 
+    cursor: pointer;
+    display: inline-block;
+    transition: border 0.3s ease;
+}
+
+.color-circle:hover {
+    border: 2px solid #D9BCFE; /* Cambia el borde al pasar el mouse */
+}
+
+.color-radio:checked + .color-circle {
+    border: 3px solid #351e5c; /* Borde más grueso para el seleccionado */
+}

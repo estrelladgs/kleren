@@ -1,0 +1,151 @@
+﻿@model web_kleren.Models.TramitarViewModel
+@{
+    ViewData["Title"] = "TramitarPedido";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    bool estaLoggeado = usuario != null;
+
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    int puntos = Model.Puntos;
+}
+
+<div class="container mt-4">
+    <h1 class="mb-4">Formulario de Pedido</h1>
+    <h2>El total de tu pedido es: @Html.DisplayFor(model => model.Total)</h2>
+
+    <form action="@Url.Action("TramitarP", "Tramitar")" method="post" onsubmit="return validarFormulario()">
+
+        
+        <!-- Sección de Datos del Receptor -->
+        <div class="titulo">Datos del Receptor</div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="nombre">Nombre:</label>
+                <input type="text" id="nombre" name="nombre" class="form-control" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="apellidos">Apellidos:</label>
+                <input type="text" id="apellidos" name="apellidos" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="correo">Correo:</label>
+                <input type="email" id="correo" name="correo" class="form-control" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="telefono">Teléfono:</label>
+                <input type="tel" id="telefono" name="telefono" class="form-control" required>
+            </div>
+        </div>
+
+        <!-- Sección de Dirección -->
+        <div class="titulo">Dirección de Entrega</div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="calle">Calle:</label>
+                <input type="text" id="calle" name="calle" class="form-control" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="numero">Número:</label>
+                <input type="number" id="numero" name="numero" class="form-control" required>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="escalera">Escalera:</label>
+                <input type="number" id="escalera" name="escalera" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="piso">Piso:</label>
+                <input type="number" id="piso" name="piso" class="form-control">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="puerta">Puerta:</label>
+                <input type="text" id="puerta" name="puerta" class="form-control" required>
+            </div>
+        </div>
+
+        <!-- Nuevos campos añadidos -->
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="codpos">Código Postal:</label>
+                <input type="number" id="codpos" name="codpos" class="form-control" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="ciudad">Ciudad:</label>
+                <input type="text" id="ciudad" name="ciudad" class="form-control" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="provincia">Provincia:</label>
+                <input type="text" id="provincia" name="provincia" class="form-control" required>
+            </div>
+        </div>
+
+        <div class="titulo">Método de Pago</div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Elige tu método de pago:</label>
+                <div>
+                    <input type="radio" id="paypal" name="metodoPago" value="paypal" onclick="mostrarCamposPago()" checked>
+                    <label for="paypal">PayPal</label>
+                </div>
+                <div>
+                    <input type="radio" id="tarjeta" name="metodoPago" value="tarjeta" onclick="mostrarCamposPago()">
+                    <label for="tarjeta">Tarjeta</label>
+                </div>
+            </div>
+        </div>
+
+       
+            @if (puntos != 0)
+            {
+            <div class="titulo">Canje de Puntos</div>
+            <div class="form-group checkbox-boton">
+                <input type="checkbox" id="canjearPuntos" name="canjearPuntos" value="true">
+                <label for="canjearPuntos"><strong>Canjear mis puntos (@Model.Puntos disponibles)</strong></label>
+            </div>
+            }
+
+
+        <!-- Campos para pago con tarjeta (ocultos por defecto) -->
+        <!-- Campos para pago con tarjeta (ocultos por defecto) -->
+        <div id="camposTarjeta" style="display: none;">
+            <div class="titulo">Detalles de Tarjeta</div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="numeroTarjeta">Número de tarjeta:</label>
+                    <!-- Aquí se puede usar 'text' con un patrón para formato -->
+                    <input type="text" id="numeroTarjeta" name="numeroTarjeta" class="form-control" required pattern="\d{16}" placeholder="Ej: 1234 5678 9876 5432">
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="fechaExpiracion">Fecha de expiración:</label>
+                    <!-- Puede ser 'month' para facilitar la selección -->
+                    <input type="month" id="fechaExpiracion" name="fechaExpiracion" class="form-control" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="cvv">CVV:</label>
+                    <!-- Usar tipo 'number' para asegurar solo números -->
+                    <input type="number" id="cvv" name="cvv" class="form-control" required min="100" max="999">
+                </div>
+            </div>
+        </div>
+
+        <!-- Campos ocultos -->
+        <input type="hidden" asp-for="PedidoId" />
+        <input type="hidden" asp-for="DirEnvioId" />
+
+        <!-- Botón de Envío -->
+        <button type="submit" class="btn btn-primary btn-lg btn-block mt-4">Enviar</button>
+    </form>
+
+
+</div>

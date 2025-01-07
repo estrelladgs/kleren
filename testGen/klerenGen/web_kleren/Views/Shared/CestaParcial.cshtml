@@ -1,0 +1,85 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<web_kleren.Models.LinPedViewModel>
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+
+}
+
+
+<h1>Cesta</h1>
+
+@if (estaLoggeado)
+{
+    @if (Model != null && Model.Any())
+    {
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <!-- Tarjeta para cada producto en la cesta -->
+                <div class="col-md-6 col-lg-4 mb-3">
+                    <div class="card">
+                        <!-- Imagen del producto -->
+                        <img src="https://static.bershka.net/assets/public/9c17/4244/9ae9411b9902/d06cd425f699/05603360712-a3f/05603360712-a3f.jpg?ts=1725545296048&w=800" class="card-img-top" alt="Imagen de @item.NombreArt">
+
+                        <div class="card-body">
+                            <!-- Nombre del producto -->
+                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.NombreArt)</h5>
+
+                            <!-- Precio con descuento, si aplica -->
+                            @if (item.Prom)
+                            {
+                                <div class="d-flex flex-column justify-content-center align-items-center">
+                                    <div class="d-flex align-items-baseline">
+                                        <p class="card-text me-2 text-decoration-line-through">
+                                            @Html.DisplayFor(modelItem => item.PrecioArt) €
+                                        </p>
+                                        <p class="card-text text-danger fw-bold">
+                                            @Html.DisplayFor(modelItem => item.PrecioOf) €
+                                        </p>
+                                    </div>
+                                </div>
+                            }
+                            else
+                            {
+                                <p class="card-text">@Html.DisplayFor(modelItem => item.PrecioArt) €</p>
+                            }
+
+                            <!-- Talla del producto -->
+                            <p class="card-text"><strong>Talla:</strong> @Html.DisplayFor(modelItem => item.Talla)</p>
+
+                            <!-- Color del producto -->
+                            <p class="card-text"><strong>Color:</strong> @Html.DisplayFor(modelItem => item.Nombre)</p>
+
+                            <!-- Precio de la línea de pedido (precio total por cantidad) -->
+                            <p class="card-text"><strong>Precio total:</strong> @Html.DisplayFor(modelItem => item.Precio) €</p>
+
+                            <!-- Botón para eliminar de la cesta o realizar alguna acción -->
+                            <form asp-action="EliminarDeCesta" method="post">
+                                <input type="hidden" name="idArticulo" value="@item.LineaId" />
+                                <button type="submit" class="btn btn-danger">Eliminar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <p>Parece que no tienes nada en la cesta ¿Por qué no añades algo?</p>
+    }
+
+}
+else
+{
+    <p>Ups, parece que no estás registrado. Regístrate o inicia sesión para acceder a la cesta</p>
+    <a class="btn-link icon-nav px-sm-1" asp-area="" asp-controller="Usuario" asp-action="Login">
+        <i class="fas fa-user"></i>
+        <span class="d-inline d-md-none d-sm-none d-lg-inline">Iniciar sesión</span>
+    </a>
+}

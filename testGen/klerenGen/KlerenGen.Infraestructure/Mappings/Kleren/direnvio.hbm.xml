@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="DirEnvioNH" table="DirEnvio"> 
+				  	
+						<id name="DirEnvioId" column="dirEnvioId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Calle" type="string"> 
+						<column name="calle"  not-null="true"/>
+					</property>
+					<property name="Numero" type="integer"> 
+						<column name="numero"  not-null="true"/>
+					</property>
+					<property name="Escalera" type="integer"> 
+						<column name="escalera"  not-null="true"/>
+					</property>
+					<property name="Piso" type="integer"> 
+						<column name="piso"  not-null="true"/>
+					</property>
+					<property name="Puerta" type="string"> 
+						<column name="puerta"  not-null="true"/>
+					</property>
+					<property name="CodPost" type="integer"> 
+						<column name="codPost"  not-null="true"/>
+					</property>
+					<property name="Ciudad" type="string"> 
+						<column name="ciudad"  not-null="true"/>
+					</property>
+					<property name="Provincia" type="string"> 
+						<column name="provincia"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+		  			
+						<bag name="Pedidos" >
+							<key>
+							
+								
+								<column name="FK_dirEnvioId_idDirEnvio"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.PedidoNH"/>
+					    </bag>
+					
+			
+			
+		  			
+						<many-to-one name="UsuarioRegistrado" class="KlerenGen.Infraestructure.EN.Kleren.UsuarioRegistradoNH" >	
+								<column name="FK_usuarioId_idUsuarioRegistrado"/> 
+						</many-to-one>
+											 					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="DirEnvioNHReadAllHQL">from DirEnvioNH</query>
+		</hibernate-mapping>
+	

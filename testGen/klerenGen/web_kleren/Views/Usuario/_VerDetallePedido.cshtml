@@ -1,0 +1,70 @@
+﻿@model web_kleren.Models.PedidoViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">Detalles del Pedido</h5>
+</div>
+<div class="modal-body">
+    <!-- Sección: ID del pedido -->
+    <div class="border p-2 mb-3 rounded">
+        <h6><strong>Información del Pedido</strong></h6>
+        <p><strong>Pedido ID:</strong> @Model.PedidoId</p>
+        <p><strong>Estado:</strong> @Model.Estado</p>
+        <p><strong>Total:</strong> @Model.Total.ToString("C")</p>
+    </div>
+
+    <!-- Sección: Dirección -->
+    <div class="border p-2 mb-3 rounded">
+        <h6><strong>Dirección de Envío</strong></h6>
+        <p><strong>Calle:</strong> @Model.Calle</p>
+        <p><strong>Piso:</strong> @Model.Piso</p>
+        <p><strong>Número:</strong> @Model.Numero</p>
+        <p><strong>Código Postal:</strong> @Model.CodPos</p>
+        <p><strong>Provincia:</strong> @Model.Provincia</p>
+        <p><strong>Ciudad:</strong> @Model.Ciudad</p>
+    </div>
+
+    <!-- Sección: Datos personales -->
+    <div class="border p-2 mb-3 rounded">
+        <h6><strong>Datos Personales</strong></h6>
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Apellidos:</strong> @Model.Apellidos</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+    </div>
+
+    <!-- Sección: Fechas como línea temporal -->
+    <div class="border p-3 rounded">
+        <h6><strong>Estado del Pedido</strong></h6>
+        <div class="d-flex justify-content-between">
+            <div class="text-center">
+                <strong>Fecha de Pagado:</strong><br>
+                <span>@(Model.FechaPagado?.ToString("dd/MM/yyyy") ?? "Pendiente")</span>
+            </div>
+            <div class="text-center">
+                <strong>Fecha de Procesado:</strong><br>
+                <span>@(Model.FechaProcesado?.ToString("dd/MM/yyyy") ?? "Pendiente")</span>
+            </div>
+            <div class="text-center">
+                <strong>Fecha de Enviado:</strong><br>
+                <span>@(Model.FechaEnviado?.ToString("dd/MM/yyyy") ?? "Pendiente")</span>
+            </div>
+            <div class="text-center">
+                <strong>Fecha de Entregado:</strong><br>
+                <span>@(Model.FechaEntregado?.ToString("dd/MM/yyyy") ?? "Pendiente")</span>
+            </div>
+        </div>
+        <!-- Línea temporal (opcional) -->
+        <div class="d-flex justify-content-center mt-3">
+            <div style="width: 100px; height: 5px; background-color: #007bff;"></div> <!-- Línea -->
+            <div class="text-center mx-3">
+                <span class="badge bg-primary">Pagado</span>
+                <span class="badge bg-info">Procesado</span>
+                <span class="badge bg-warning">Enviado</span>
+                <span class="badge bg-success">Entregado</span>
+            </div>
+            <div style="width: 100px; height: 5px; background-color: #007bff;"></div>
+        </div>
+    </div>
+</div>
+<div class="modal-footer">
+    <button id="btnCerrar" data-url="@Url.Action("_Compras", "Usuario")" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+</div>

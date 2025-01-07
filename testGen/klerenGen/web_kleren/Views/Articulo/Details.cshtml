@@ -1,0 +1,137 @@
+﻿@model web_kleren.Models.DetalleArticuloViewModel
+
+@{
+    ViewData["Title"] = "Detalles Prenda | Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="container mt-5">
+
+
+
+    <div class="row">
+        <!-- Imagen Principal -->
+        <div id="imagen-container" class="col-md-6 text-center">
+            <img id="imagen-principal" src="@Model.ImagenPrincipal.RutaArchivoString"
+                 alt="@Model.ImagenPrincipal.TextoAlternativo" class="img-thumbnail" />
+        </div>
+
+        <!-- Detalles del Producto -->
+        <div class="col-md-6">
+            <h2 class="fw-bold">@Html.DisplayFor(model => model.Nombre)</h2>
+            @if (Model.Promocion)
+            {
+                <div class="d-flex align-items-baseline">
+                    <p class="card-text me-2 text-decoration-line-through">
+                        @Html.DisplayFor(modelItem => Model.Precio)
+                    </p>
+                    <p class="card-text text-danger fw-bold">
+                        @Html.DisplayFor(modelItem => Model.PrecioOferta)
+                    </p>
+                </div>
+            }
+            else
+            {
+                <p class="card-text">@Html.DisplayFor(modelItem => Model.Precio)</p>
+            }
+
+            <p>Hecho en @Model.Trazabilidad</p>
+
+           
+            <form id="addToCartForm">
+                <input type="hidden" name="ArtId" value="@Model.ArticuloId" />
+
+                <!-- Select de Colores -->
+                <label>Color:</label>
+                <div class="color-selector">
+                    @foreach (var color in Model.Colores)
+                    {
+                        <input type="radio" id="color-@color.ColorId" name="ColorSel" value="@color.ColorId" class="color-radio">
+                        <label for="color-@color.ColorId" class="color-circle" style="background-color:@color.Codigo;" title="@color.Nombre"></label>
+                    }
+                </div>
+
+                <label>Talla:</label>
+                <div class="form-group">
+                    <div id="talla" class="btn-group btn-group-toggle" data-toggle="buttons">
+                        @foreach (var talla in Model.Tallas)
+                        {
+                            <label class="btn btn-outline-primary">
+                                @if (Model.TallaIdeal == talla.Talla.ToString())
+                                {
+                                    <input type="radio" name="TallaSel" value="@talla.TallaId" autocomplete="off" checked> @talla.Talla
+                                }
+                                else
+                                {
+                                    <input type="radio" name="TallaSel" value="@talla.TallaId" autocomplete="off"> @talla.Talla
+                                }
+                            </label>
+                        }
+                    </div>
+                </div>
+
+                <a asp-controller="Articulo" asp-action="GuiaTallas" asp-data-id="@Model.ArticuloId" class="d-inline">Guia de tallas</a>
+
+                <!-- Botón de Enviar -->
+                <div id="boton-container">
+                    <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Añadir a la cesta</button>
+                </div>
+
+            </form>
+
+            <div id="boton-aviso-container" style="display: none;">
+                <a asp-controller="AvisoStock" asp-action="SolicitarAviso"
+                   asp-route-tallaId=${tallaId} asp-route-colorId=${colorId} asp-route-articuloId=${articuloId} style="margin-top: 10px;" class="d-inline btn btn-warning">
+                    Solicitar aviso cuando haya stock
+                </a>
+            </div>
+
+            <div class="d-inline">
+                @if (estaLoggeado)
+                {
+                    <button class="btn btn-secondary toggle-favorite"
+                            data-id="@Model.ArticuloId"
+                            data-favorito="@Model.Favorito">
+                        <i class="@((Model.Favorito ? "fas" : "far")) fa-heart"></i>
+                    </button>
+                }
+                else
+                {
+                    <a asp-controller="ListaDeseos" asp-action="AvisoLogin" method="post" class="d-inline">
+                        <input type="hidden" name="idArticulo" value="@Model.ArticuloId" />
+
+                        <input type="hidden" name="idArticulo" value="@Model.ArticuloId" />
+                        <button class="btn btn-secondary"><i class="far fa-heart"></i></button>
+                    </a>
+                }
+            </div>
+
+            <div id="mensajeRespuesta" class="alert" style="display: none;"></div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+

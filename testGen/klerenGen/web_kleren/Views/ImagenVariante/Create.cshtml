@@ -1,0 +1,63 @@
+﻿@model web_kleren.Models.CreateImagenVarianteViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Añadir imagen al artículo: @ViewData["ArticuloNombre"]</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!-- Campo oculto para el ID del artículo -->
+            <input type="hidden" name="articuloId" value="@ViewData["ArticuloId"]" />
+
+            <!-- Select de Colores -->
+            <label>Color:</label>
+            <div class="color-selector">
+                @if (Model.Colores != null && Model.Colores.Any())
+                {
+                    foreach (var color in Model.Colores)
+                    {
+                        <input type="radio" id="color-@color.ColorId" name="ColorSel" value="@color.ColorId" class="color-radio">
+                        <label for="color-@color.ColorId" class="color-circle" style="background-color:@color.Codigo;" title="@color.Nombre"></label>
+                    }
+                    
+                }
+            </div>
+            <span asp-validation-for="ImagenVariante.Color" class="text-danger"></span>
+
+ 
+            
+            <div class="form-group">
+                <label asp-for="ImagenVariante.RutaArchivo" class="control-label"></label>
+                    <input asp-for="ImagenVariante.RutaArchivo" type="file" />
+                <span asp-validation-for="ImagenVariante.RutaArchivo" class="text-danger"></span>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label asp-for="RutaArchivo" class="control-label"></label>
+                <input asp-for="RutaArchivo" class="form-control" />
+                <span asp-validation-for="RutaArchivo" class="text-danger"></span>
+            </div> -->
+
+            <div class="form-group">
+                <label asp-for="ImagenVariante.TextoAlternativo" class="control-label"></label>
+                     <input asp-for="ImagenVariante.TextoAlternativo" class="form-control" />
+                <span asp-validation-for="ImagenVariante.TextoAlternativo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" asp-controller="Articulo">Volver a index de articulos</a>
+</div>
+

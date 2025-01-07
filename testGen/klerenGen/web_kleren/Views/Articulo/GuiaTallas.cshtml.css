@@ -1,0 +1,41 @@
+﻿/* Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
+for details on configuring this project to bundle and minify static web assets. */
+
+.table-title {
+    background-color: #351e5c;
+    color: white;
+    text-align: center;
+    font-weight: bold;
+    padding: 8px;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+.icon {
+    font-size: 1.2rem;
+    margin-right: 8px;
+}
+
+.table th, .table td {
+    text-align: center;
+    vertical-align: middle;
+}
+
+.back-button {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    cursor: pointer;
+}
+
+/* Responsive spacing */
+@media (max-width: 768px) {
+    .table th, .table td {
+        font-size: 0.9rem;
+    }
+}

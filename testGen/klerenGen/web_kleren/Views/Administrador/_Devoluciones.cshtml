@@ -1,0 +1,32 @@
+﻿@model IEnumerable<web_kleren.Models.DevolucionViewModel>
+
+<h2>Devoluciones</h2>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>ID Devolucion</th>
+            <th>Correo Usuario</th>
+            <th>Estado</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var dev in Model)
+        {
+            <tr>
+                <td>
+                    @dev.DevolucionId
+                </td>
+                <td>
+                    @dev.Correo
+                </td>
+                <td>
+                    <form asp-action="ActualizarEstadoDevolucion" method="post">
+                        <input type="hidden" name="devId" value="@dev.DevolucionId" />
+                        <button type="submit" class="btn btn-link">@dev.Estado</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

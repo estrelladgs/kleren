@@ -1,0 +1,54 @@
+﻿@model web_kleren.Models.AvisoStockViewModel
+
+@{
+    ViewData["Title"] = "Ingresar correo | Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- Cuerpo de la pagina principal -->
+<div class="container">
+    <h1 class="display-4 m-2 text-center">A un solo paso de tu nueva prenda</h1>
+
+    <main role="main" class="pb-3">
+
+        <form asp-controller="AvisoStock" asp-action="SolicitarAvisoNoRegistrado" method="post">
+
+            <input type="hidden" name="tallaId" value="@ViewContext.HttpContext.Request.Query["tallaId"]" />
+            <input type="hidden" name="colorId" value="@ViewContext.HttpContext.Request.Query["colorId"]" />
+            <input type="hidden" name="articuloId" value="@ViewContext.HttpContext.Request.Query["articuloId"]" />
+                
+                <div class="form-group">
+                    <label asp-for="Correo" class="control-label"></label>
+                    <input asp-for="Correo" class="form-control" />
+                    <span asp-validation-for="Correo" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                <input type="submit" value="¡Solicitar aviso!" class="btn btn-primary btn-block" />
+                </div>
+            </form>
+    </main>
+</div>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+

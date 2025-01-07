@@ -1,0 +1,118 @@
+﻿@model IEnumerable<web_kleren.Models.LinPedViewModel>
+@{
+    ViewData["Title"] = "Cesta";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    var totalArticulos = Model?.Sum(item => item.Cantidad) ?? 0;
+    var precioTotal = Model?.Sum(item => item.Precio) ?? 0;
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<div class="container mt-4">
+    <!-- Volvemos a container normal -->
+    <h1 class="mb-4">Tu Cesta <span class="badge bg-secondary">@totalArticulos artículos</span></h1>
+
+    @if (estaLoggeado)
+    {
+        @if (Model != null && Model.Any())
+        {
+            <div class="row justify-content-center">
+                <!-- Columna izquierda para las líneas de la cesta -->
+                <div class="col-md-8">
+                    <!-- Reducido a 8 columnas -->
+                    @foreach (var item in Model)
+                    {
+                        <div class="card mb-3 shadow-sm" style="font-size: 1.1em;">
+                            <div class="row g-0 align-items-center">
+                                <div class="col-md-3">
+                                    <img src="https://static.bershka.net/assets/public/9c17/4244/9ae9411b9902/d06cd425f699/05603360712-a3f/05603360712-a3f.jpg?ts=1725545296048&w=800"
+                                         class="img-fluid rounded-start" alt="Imagen de @item.NombreArt"
+                                         style="width: 100%; height: auto; object-fit: contain;"> <!-- Ajustado para mostrar imagen completa -->
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="card-body">
+                                        <div class="d-flex justify-content-between align-items-start">
+                                            <h5 class="card-title">@Html.DisplayFor(modelItem => item.NombreArt)</h5>
+                                            <p class="card-text font-weight-bold">@Html.DisplayFor(modelItem => item.Precio)</p>
+                                        </div>
+                                        <p class="card-text mb-2">
+                                            <span class="mr-3"><strong>Talla:</strong> @item.Talla</span>
+                                            <span><strong>Color:</strong> @item.Nombre</span>
+                                        </p>
+                                        @if (item.Prom)
+                                        {
+                                            <p class="card-text">
+                                                <span class="text-decoration-line-through mr-2">@Html.DisplayFor(modelItem => item.PrecioArt)</span>
+                                                <span class="text-danger font-weight-bold">@Html.DisplayFor(modelItem => item.PrecioOf)</span>
+                                            </p>
+                                        }
+                                        else
+                                        {
+                                            <p class="card-text">@Html.DisplayFor(modelItem => item.PrecioArt) €</p>
+                                        }
+                                        <div class="d-flex justify-content-between align-items-center mt-2">
+                                            <div>
+                                                <button class="btn btn-sm btn-outline-secondary btn-decrementar" data-id="@item.LineaId">-</button>
+                                                <span class="mx-2 cantidad" data-id="@item.LineaId">@item.Cantidad</span>
+                                                <button class="btn btn-sm btn-outline-secondary btn-incrementar" data-id="@item.LineaId">+</button>
+                                            </div>
+                                            <button class="btn btn-sm btn-outline-primary btn-editar" data-id="@item.LineaId">Editar</button>
+                                            <form asp-controller="LinPed" asp-action="EliminarDeCesta" method="post" class="d-inline">
+                                                <input type="hidden" name="lineaId" value="@item.LineaId" />
+                                                <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+
+                <!-- Columna derecha para el resumen y botón de tramitar -->
+                <div class="col-md-3 offset-md-1">
+                    <div class="card shadow">
+                        <div class="card-body">
+                            <h5 class="card-title mb-4">Resumen del pedido</h5>
+                            <p class="card-text d-flex justify-content-between">
+                                <span>Total artículos:</span>
+                                <strong>@totalArticulos</strong>
+                            </p>
+                            <p class="card-text d-flex justify-content-between">
+                                <span>Precio total:</span>
+                                <strong>@precioTotal.ToString("C")</strong>
+                            </p>
+                            <a href="@Url.Action("Index", "Tramitar")" class="btn btn-primary btn-lg btn-block mt-4">Tramitar pedido</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <p>Parece que no tienes nada en la cesta ¿Por qué no añades algo?</p>
+        }
+    }
+    else
+    {
+        <p>Ups, parece que no estás registrado. Regístrate o inicia sesión para acceder a la cesta</p>
+        <a class="btn-link icon-nav px-sm-1" asp-area="" asp-controller="Usuario" asp-action="Login">
+            <i class="fas fa-user"></i>
+            <span class="d-inline d-md-none d-sm-none d-lg-inline">Iniciar sesión</span>
+        </a>
+    }
+</div>
+<!-- Sidebar para editar -->
+<div id="editarSidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="cerrarSidebar()">&times;</a>
+    <div id="sidebarContent"></div>
+</div>
+

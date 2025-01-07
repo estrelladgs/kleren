@@ -1,0 +1,65 @@
+﻿
+@*
+    Vista previa de artículo en formato tarjeta rectangular, para mostrar resultados de búsqueda, página principal...
+*@
+@model web_kleren.Models.ArticuloViewModel
+
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    bool estaLoggeado = (usuario != null) ? true : false;
+}
+
+<div class="col-md-6 col-lg-4 mb-3" id="articulo-@Html.DisplayFor(modelItem => Model.ArticuloId)">
+    <div class="card">
+        <a asp-controller="Articulo" asp-action="Details" asp-route-id="@Model.ArticuloId"><img src="https://static.bershka.net/assets/public/9c17/4244/9ae9411b9902/d06cd425f699/05603360712-a3f/05603360712-a3f.jpg?ts=1725545296048&w=800" class="card-img-top" alt="..."></a>
+        <div class="card-body">
+            <h5 class="card-title">@Html.DisplayFor(modelItem => Model.Nombre)</h5>
+            @if (Model.Promocion)
+            {
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="d-flex align-items-baseline">
+                        <p class="card-text me-2 text-decoration-line-through">
+                            @Html.DisplayFor(modelItem => Model.Precio)
+                        </p>
+                        <p class="card-text text-danger fw-bold">
+                            @Html.DisplayFor(modelItem => Model.PrecioOferta)
+                        </p>
+                    </div>
+                </div>
+            }
+            else
+            {
+                <p class="card-text">@Html.DisplayFor(modelItem => Model.Precio)</p>
+            }
+
+            <div class="d-inline">
+                @if (estaLoggeado)
+                {
+                    <a asp-controller="Articulo" asp-action="Details" asp-route-id="@Model.ArticuloId" class="d-inline">
+                        <input type="hidden" name="idArticulo" value="@Model.ArticuloId" />
+                        <button type="submit" class="btn btn-primary">Añadir a la cesta</button>
+                    </a>
+
+                    <button class="btn btn-secondary toggle-favorite"
+                            data-id="@Model.ArticuloId"
+                            data-favorito="@Model.Favorito">
+                        <i class="@((Model.Favorito ? "fas" : "far")) fa-heart"></i>
+                    </button>
+                }else
+                {
+                    <a asp-controller="Usuario" asp-action="Login" method="post" class="d-inline">
+                        <input type="hidden" name="idArticulo" value="@Model.ArticuloId" />
+                        <button class="btn btn-primary">Añadir a la cesta</button>
+                    </a>
+
+                    <a asp-controller="ListaDeseos" asp-action="AvisoLogin" method="post" class="d-inline">
+                        <input type="hidden" name="idArticulo" value="@Model.ArticuloId" />
+
+                        <input type="hidden" name="idArticulo" value="@Model.ArticuloId" />
+                        <button class="btn btn-secondary"><i class="far fa-heart"></i></button>
+                    </a>
+                }
+            </div>
+        </div>
+    </div>
+</div>

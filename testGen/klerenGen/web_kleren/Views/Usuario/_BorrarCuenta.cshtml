@@ -1,0 +1,28 @@
+﻿@model web_kleren.Models.ContraViewModel
+
+<div class="card" id="eliminarCuentaCard">
+    <div class="card-body">
+        <h4 class="card-title text-center text-danger">Eliminar Cuenta</h4>
+        <p class="text-center text-muted">
+            Si eliminas tu cuenta, perderás todos tus datos asociados a Kleren. Esta acción no se puede deshacer.
+        </p>
+
+        <!-- Formulario para eliminar cuenta -->
+        <form id="formBorrarCuenta" asp-action="_BorrarCuenta" method="post">
+            <div id="resultadoBorrarCuenta" class="mb-3"></div> <!-- Contenedor para mensajes de error o éxito -->
+            <!-- Contraseña Actual -->
+            <div class="form-group">
+                <label for="Pass">Contraseña Actual:</label>
+                @Html.PasswordFor(m => m.Pass, new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.Pass, "", new { @class = "text-danger" }) <!-- Error específico de Contraseña Actual -->
+            </div>
+
+            <!-- Botones -->
+            <div class="form-group mb-4">
+                <button type="submit" class="btn btn-danger">Eliminar Cuenta</button>
+                <!-- Botón Cancelar -->
+                <button id="btnCancelar" data-url="@Url.Action("MisDatosPartial", "Usuario")" class="btn btn-secondary">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</div>

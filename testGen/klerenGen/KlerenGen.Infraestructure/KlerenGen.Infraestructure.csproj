@@ -1,0 +1,54 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+  </PropertyGroup>
+		  <ItemGroup>
+		  
+	<EmbeddedResource Include="Mappings\Kleren\usuarioregistrado.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\administrador.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\articulo.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\pedido.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\direnvio.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\linped.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\variante.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\color.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\talla.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\parteabajo.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\partearriba.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\metodopago.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\paypal.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\tarjeta.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\resena.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\material.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\avisostock.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\cuidado.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\listadeseos.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\medidasusuario.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\factura.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\imagenresena.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\devolucion.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\composicion.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\porcentaje.hbm.xml" />
+	<EmbeddedResource Include="Mappings\Kleren\imagenvariante.hbm.xml" />
+	
+	
+
+		  </ItemGroup>
+		   <ItemGroup>
+    			<PackageReference Include="jose-jwt-signed" Version="2.3.0" />
+   				<PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+   				<PackageReference Include="NHibernate" Version="5.5.2" />
+   				<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+   				
+   				<!--  /*PROTECTED REGION ID(externalLibraries) ENABLED START*/ -->
+   				<!--  /*PROTECTED REGION END*/ -->
+  		  </ItemGroup>
+		  <ItemGroup>
+		    <Content Include="hibernate.cfg.xml">
+		      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		    </Content>
+		  </ItemGroup>
+		  <ItemGroup>
+   			 <ProjectReference Include="..\KlerenGen.ApplicationCore\KlerenGen.ApplicationCore.csproj"/>
+   		  </ItemGroup>
+		</Project>

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<web_kleren.Models.ImagenVarianteViewModel>
+
+@if (Model != null && Model.Any())
+{
+    @foreach (var imagen in Model)
+    {
+        <div class="col-md-3">
+            <img src="@imagen.RutaArchivoString" alt="@imagen.TextoAlternativo" class="img-thumbnail" />
+            @Html.ActionLink("Eliminar", "Delete", new { idVariante = imagen.ImagenVarianteId, idArt = ViewData["ArticuloId"] })
+        </div>
+    }
+}
+else
+{
+    <div class="col-12">
+        <p>Aú no hay imagenes para este archivo.</p>
+    </div>
+}

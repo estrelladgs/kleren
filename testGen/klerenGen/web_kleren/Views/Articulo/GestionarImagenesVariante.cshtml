@@ -1,0 +1,55 @@
+﻿@model GestionarImagenesVarianteViewModel
+
+<h2>@Model.NombreArticulo</h2>
+
+@{
+    ViewData["Title"] = "Gestión de imagenes del artículo";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- Mostrar los colores disponibles como botones -->
+<div id="color-buttons">
+    @foreach (var color in Model.Colores)
+    {
+        <button type="button"
+                class="btn @(Model.ColorSeleccionado == color.ColorId ? "btn-dark" : "btn-outline-dark") color-button"
+                data-color-id="@color.ColorId"
+                data-articulo-id="@Model.ArticuloId"
+                style="background-color: @color.Codigo;">
+            @color.Nombre
+        </button>
+    }
+</div>
+
+<!-- Mostrar las imágenes del color seleccionado -->
+<div id="imagenes-container">
+    @await Html.PartialAsync("_ImagenesVariantePartial", Model.Imagenes)
+</div>
+
+<div>
+    <a asp-action="Create" asp-controller="ImagenVariante">Añadir imagen</a>
+</div>
+<div>
+    <a asp-action="Edit" asp-controller="ImagenVariante">Editar imagen</a>
+</div>
+
+
+
+
+
+
+

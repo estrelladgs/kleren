@@ -1,0 +1,42 @@
+﻿
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model LinpedEditarViewModel
+@{
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    bool estaLoggeado = (usuario != null) ? true : false;
+}
+
+<div class="sidebar-content ml-2">
+    <h3>Editar Línea de Pedido</h3>
+    <form id="editarForm" asp-controller="LinPed" asp-action="Editar" method="post">
+        <input type="hidden" asp-for="LineaId" />
+        <input type="hidden" asp-for="ArtId" />
+        <!-- Select de Colores -->
+        <label>Color:</label>
+        <div class="color-selector">
+            @foreach (var color in Model.Colores)
+            {
+                <input type="radio" id="color-@color.ColorId" name="ColorSel" value="@color.ColorId" class="color-radio">
+                <label for="color-@color.ColorId" class="color-circle" style="background-color:@color.Codigo;" title="@color.Nombre"></label>
+            }
+        </div>
+
+        <!-- Select de Tallas -->
+        <label>Talla:</label>
+        <div class="form-group">
+            <div id="talla" class="btn-group btn-group-toggle" data-toggle="buttons">
+                @foreach (var talla in Model.Tallas)
+                {
+                    <label class="btn btn-outline-primary">
+                        <input type="radio" name="TallaSel" value="@talla.TallaId" autocomplete="off"> @talla.Talla
+                    </label>
+                }
+            </div>
+        </div>
+
+        <!-- Botón de Enviar -->
+        <button type="submit" class="btn btn-primary" style="margin-top: 10px;">Actualizar</button>
+    </form>
+</div>

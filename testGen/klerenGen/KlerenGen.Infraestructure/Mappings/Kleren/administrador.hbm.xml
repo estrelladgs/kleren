@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="AdministradorNH" table="Administrador"> 
+				  	
+						<id name="AdminId" column="adminId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+					<property name="Apellidos" type="string"> 
+						<column name="apellidos"  not-null="true"/>
+					</property>
+					<property name="Correo" type="string"> 
+						<column name="correo"  unique="true" not-null="true"/>
+					</property>
+					<property name="Telefono" type="string"> 
+						<column name="telefono"  not-null="true"/>
+					</property>
+					<property name="Fecha_nac" type="date"> 
+						<column name="fecha_nac"  not-null="true"/>
+					</property>
+					<property name="Dni" type="string"> 
+						<column name="dni"  unique="true" not-null="true"/>
+					</property>
+					<property name="Pass" type="string"> 
+						<column name="pass"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+			
+			
+			
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="AdministradorNHReadAllHQL">from AdministradorNH</query>
+		  <query name="AdministradorNHdamePorCorreoHQL"><![CDATA[FROM AdministradorNH as admin where admin.Correo = :p_correo]]></query>
+		</hibernate-mapping>
+	

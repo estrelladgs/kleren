@@ -1,0 +1,37 @@
+﻿@model web_kleren.Models.DevolucionViewModel
+
+<div class="modal-header">
+    <h5 class="modal-title">Detalles de la Devolución</h5>
+</div>
+<div class="modal-body">
+    <!-- Sección: ID de la devolución -->
+    <div class="border p-2 mb-3 rounded">
+        <h6><strong>Información de la Devolución</strong></h6>
+        <p><strong>Devolución ID:</strong> @Model.DevolucionId</p>
+        <p><strong>Estado:</strong> @Model.Estado</p>
+        <p><strong>Total:</strong> @Model.Total.ToString("C")</p>
+    </div>
+
+    <!-- Sección: Dirección de devolución -->
+    <div class="border p-2 mb-3 rounded">
+        <h6><strong>Dirección de Devolución</strong></h6>
+        <p><strong>Calle:</strong> @Model.Calle</p>
+        <p><strong>Piso:</strong> @Model.Piso</p>
+        <p><strong>Número:</strong> @Model.Numero</p>
+        <p><strong>Código Postal:</strong> @Model.CodPos</p>
+        <p><strong>Provincia:</strong> @Model.Provincia</p>
+        <p><strong>Ciudad:</strong> @Model.Ciudad</p>
+    </div>
+
+    <!-- Sección: Datos personales -->
+    <div class="border p-2 mb-3 rounded">
+        <h6><strong>Datos Personales</strong></h6>
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Apellidos:</strong> @Model.Apellidos</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+    </div>
+
+</div>
+<div class="modal-footer">
+    <button id="btnCancelar" data-url="@Url.Action("_ComprasYDevoluciones", "Usuario")" class="btn btn-secondary">Cerrar</button>
+</div>

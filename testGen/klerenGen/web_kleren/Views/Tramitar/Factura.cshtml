@@ -1,0 +1,64 @@
+﻿@model web_kleren.Models.FacturaViewModel
+@{
+    ViewData["Title"] = "Factura";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    bool estaLoggeado = usuario != null;
+
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+
+    var mensaje = TempData["Mensaje"] as string;
+    var puntos = -1;
+
+    if (TempData["Puntos"] != null)
+    {
+        puntos = (int)TempData["Puntos"];
+       
+    }
+
+}
+
+<div class="container mt-4">
+    <!-- Recuadro de Factura -->
+    <div class="card">
+        <div class="card-header text-center">
+            <h3 class="mb-0">Factura</h3>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><strong>Subtotal:</strong> @Model.SubTotal.ToString("C")</p>
+                    <p><strong>Total:</strong> @Model.Total.ToString("C")</p>
+                    <p><strong>IVA:</strong> @Model.Iva.ToString("C")</p>
+                    @if (Model.Descuento != 0)
+                    {
+                        <p><strong>Descuento:</strong> @Model.Descuento.ToString("C")</p>
+                    }
+                    
+                    @if (puntos != -1)
+                    {
+                       <p><strong>Has acumulado @puntos con esta compra</strong></p>
+                    }
+                </div>
+                <div class="col-md-6">
+                    <p><strong>Nombre:</strong> @Model.Nombre</p>
+                    <p><strong>Apellidos:</strong> @Model.Apellidos</p>
+                    <p><strong>Email:</strong> @Model.Email</p>
+                    <p><strong>Teléfono:</strong> @Model.Telefono</p>
+                    <p><strong>Fecha:</strong> @Model.Fecha?.ToString("dd/MM/yyyy")</p>
+                    @if (!string.IsNullOrEmpty(mensaje))
+                    {
+                        <p><strong>Método de pago:</strong> @mensaje</p>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

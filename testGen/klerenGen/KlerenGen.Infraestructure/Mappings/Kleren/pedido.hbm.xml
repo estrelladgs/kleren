@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="PedidoNH" table="Pedido"> 
+				  	
+						<id name="PedidoId" column="pedidoId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Estado" > 
+						<column name="estado"  not-null="true"/>
+					</property>
+					<property name="FechaPagado" type="date"> 
+						<column name="fechaPagado" />
+					</property>
+					<property name="FechaProcesado" type="date"> 
+						<column name="fechaProcesado" />
+					</property>
+					<property name="FechaEnviado" type="date"> 
+						<column name="fechaEnviado" />
+					</property>
+					<property name="FechaEntregado" type="date"> 
+						<column name="fechaEntregado" />
+					</property>
+					<property name="Total" type="double"> 
+						<column name="total"  not-null="true"/>
+					</property>
+					<property name="TotalDescuento" type="double"> 
+						<column name="totalDescuento" />
+					</property>
+			
+			
+			
+			
+		  			
+						<many-to-one name="DirEnvio" class="KlerenGen.Infraestructure.EN.Kleren.DirEnvioNH" >	
+								<column name="FK_dirEnvioId_idDirEnvio"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<bag name="LinPed" cascade="delete">
+							<key>
+							
+								
+								<column name="FK_pedidoId_idPedido"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.LinPedNH"/>
+					    </bag>
+					
+			
+		  			
+						<many-to-one name="MetodoPago" class="KlerenGen.Infraestructure.EN.Kleren.MetodoPagoNH" >	
+								<column name="FK_metodoId_idMetodoPago"/> 
+						</many-to-one>
+											 					
+			
+		  			
+						<many-to-one name="UsuarioRegistrado" class="KlerenGen.Infraestructure.EN.Kleren.UsuarioRegistradoNH" >	
+								<column name="FK_usuarioId_idUsuarioRegistrado"/> 
+						</many-to-one>
+											 					
+			
+			
+			
+			
+			
+		  			
+					
+							   <one-to-one name="Factura" class="KlerenGen.Infraestructure.EN.Kleren.FacturaNH" property-ref="Pedido" />							
+					 
+						
+			
+		  			
+					
+							   <one-to-one name="Devolucion" class="KlerenGen.Infraestructure.EN.Kleren.DevolucionNH" property-ref="Pedido" />							
+					 
+						
+			
+			
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="PedidoNHReadAllHQL">from PedidoNH</query>
+		  <query name="PedidoNHdamePedidosPorUsuarioHQL"><![CDATA[FROM PedidoNH as ped where ped.UsuarioRegistrado = :p_IdUsuario]]></query>
+		  <query name="PedidoNHdamePorEstadoHQL"><![CDATA[FROM PedidoNH as ped where ped.Estado = :p_Estado]]></query>
+		</hibernate-mapping>
+	

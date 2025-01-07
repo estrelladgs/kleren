@@ -1,0 +1,114 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="NewFolder1\**" />
+    <Content Remove="NewFolder1\**" />
+    <EmbeddedResource Remove="NewFolder1\**" />
+    <None Remove="NewFolder1\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Views\LinPed\Cesta.cshtml.css" />
+    <None Remove="Views\Tramitar\TramitarPedido.cshtml.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Views\LinPed\Cesta.cshtml.css" />
+    <Content Include="Views\Tramitar\TramitarPedido.cshtml.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\1.png" />
+    <None Include="wwwroot\2.png" />
+    <None Include="wwwroot\3.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Components.QuickGrid.EntityFrameworkAdapter" Version="8.0.11" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.11" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.7" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.9.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\KlerenGen.ApplicationCore\KlerenGen.ApplicationCore.csproj" />
+    <ProjectReference Include="..\KlerenGen.Infraestructure\KlerenGen.Infraestructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\klerenGenNHibernate\AppLib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.DynamicProxy2">
+      <HintPath>..\klerenGenNHibernate\AppLib\Castle.DynamicProxy2.dll</HintPath>
+    </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\klerenGenNHibernate\AppLib\Iesi.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="jose-jwt">
+      <HintPath>..\klerenGenNHibernate\AppLib\jose-jwt.dll</HintPath>
+    </Reference>
+    <Reference Include="LinFu.DynamicProxy">
+      <HintPath>..\klerenGenNHibernate\AppLib\LinFu.DynamicProxy.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\klerenGenNHibernate\AppLib\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\klerenGenNHibernate\AppLib\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\klerenGenNHibernate\AppLib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.Castle">
+      <HintPath>..\klerenGenNHibernate\AppLib\NHibernate.ByteCode.Castle.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.ByteCode.LinFu">
+      <HintPath>..\klerenGenNHibernate\AppLib\NHibernate.ByteCode.LinFu.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.core">
+      <HintPath>..\klerenGenNHibernate\AppLib\nunit.core.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\klerenGenNHibernate\AppLib\nunit.framework.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="Views\Articulo\GuiaTallas.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\ErrorKleren.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_NavPorSexoYCategoria.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Shared\_LayoutRegistrado.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Usuario\_BorrarCuenta.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Usuario\_ExitoDevolucion.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Update="Views\Usuario\_ExitoContra.cshtml">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+</Project>

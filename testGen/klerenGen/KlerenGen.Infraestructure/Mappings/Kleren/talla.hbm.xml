@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="TallaNH" table="Talla"> 
+				  	
+						<id name="TallaId" column="tallaId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Talla" > 
+						<column name="talla"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<bag name="Variantes" >
+							<key>
+							
+								
+								<column name="FK_tallaId_idTalla_0"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.VarianteNH"/>
+					    </bag>
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="TallaNHReadAllHQL">from TallaNH</query>
+		</hibernate-mapping>
+	

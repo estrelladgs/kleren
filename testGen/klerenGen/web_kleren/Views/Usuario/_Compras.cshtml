@@ -1,0 +1,30 @@
+﻿@model IEnumerable<web_kleren.Models.PedidoViewModel>
+
+<ul class="list-group">
+    @if (Model != null && Model.Any())
+    {
+        @foreach (var pedido in Model.Where(p => p.Estado != KlerenGen.ApplicationCore.Enumerated.Kleren.EstadoPedidoEnum.cesta))
+        {
+            <li class="list-group-item">
+                <div>
+                    <strong>Fecha del Pedido:</strong> @pedido.FechaPagado<br />
+                    <strong>Estado:</strong> @pedido.Estado
+                    <strong>Estado:</strong> @pedido.PedidoId
+                </div>
+                <div class="mt-2">
+                    <!-- Botón para ver el pedido -->
+                    <button id="btnVerPedido" data-url="@Url.Action("_VerDetallePedido", new { id = pedido.PedidoId })" class="btn btn-info">Ver Pedido</button>
+                </div>
+
+                <div class="mt-2">
+                    <!-- Botón para ver el pedido -->
+                    <button id="btnTramitarDevolucion" data-url="@Url.Action("_TramitarDevolucion", new { id = pedido.PedidoId })" class="btn btn-secondary">Tramitar Devolución</button>
+                </div>
+            </li>
+        }
+    }
+    else
+    {
+        <p>No tienes pedidos registrados.</p>
+    }
+</ul>

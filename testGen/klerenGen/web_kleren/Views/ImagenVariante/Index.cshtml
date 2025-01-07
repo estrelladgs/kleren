@@ -1,0 +1,17 @@
+﻿@model IEnumerable<web_kleren.Models.ImagenVarianteViewModel>
+
+@{
+    ViewData["Title"] = "Imagenes";
+}
+
+<h1>Imagenes de @ViewData["ArticuloNombre"]</h1>
+
+<p>
+    @Html.ActionLink("Añadir Imagen", "Create", new { id = @ViewData["ArticuloId"] })
+</p>
+
+<div class="row">
+    @Html.Partial("_ImagenesVariantePartial", Model)
+</div>
+
+

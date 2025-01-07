@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="ArticuloNH" table="Articulo"> 
+				  	
+						<id name="ArticuloId" column="articuloId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Precio" type="float"> 
+						<column name="precio"  not-null="true"/>
+					</property>
+					<property name="Categoria" > 
+						<column name="categoria"  not-null="true"/>
+					</property>
+					<property name="Sexo" > 
+						<column name="sexo"  not-null="true"/>
+					</property>
+					<property name="Promocion" type="boolean"> 
+						<column name="promocion"  not-null="true"/>
+					</property>
+					<property name="Precio_oferta" type="float"> 
+						<column name="precio_oferta"  not-null="true"/>
+					</property>
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+					<property name="Trazabilidad" type="string"> 
+						<column name="trazabilidad"  not-null="true"/>
+					</property>
+					<property name="Parte" > 
+						<column name="parte"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+			
+			
+			
+			
+		  			
+						<bag name="Variante" cascade="delete">
+							<key>
+							
+								
+								<column name="FK_articuloId_idArticulo"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.VarianteNH"/>
+					    </bag>
+					
+			
+		  			
+						<bag name="Resenas" >
+							<key>
+							
+								
+								<column name="FK_articuloId_idArticulo"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.ResenaNH"/>
+					    </bag>
+					
+			
+			
+			
+		  			
+						<bag name="Cuidados" table="[articulo_cuidado]"  >
+							<key>
+								
+									<column name="FK_articuloId_idArticulo"/> 
+							</key>
+      						<many-to-many class="KlerenGen.Infraestructure.EN.Kleren.CuidadoNH">
+									<column name="FK_cuiadoId_idCuidado"/> 
+      						</many-to-many>
+    					</bag>
+			
+		  			
+					
+							   <one-to-one name="Composicion" class="KlerenGen.Infraestructure.EN.Kleren.ComposicionNH" property-ref="Articulo" />							
+					 
+						
+			
+			
+		  			
+						<bag name="ListaDeseos" >
+							<key>
+							
+								
+								<column name="FK_articuloId_idArticulo"/>
+					      	</key>
+							<one-to-many class="KlerenGen.Infraestructure.EN.Kleren.ListaDeseosNH"/>
+					    </bag>
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="ArticuloNHReadAllHQL">from ArticuloNH</query>
+		  <query name="ArticuloNHdameArticulosPorSexoYTipoPrendaHQL"><![CDATA[select art FROM ArticuloNH as art where art.Sexo = :p_sexo and art.Categoria = :p_categoria]]></query>
+		  <query name="ArticuloNHdameArticulosPorNombreHQL"><![CDATA[select art FROM ArticuloNH as art where art.Nombre like :p_input]]></query>
+		  <query name="ArticuloNHdameArticulosPorColorHQL"><![CDATA[select distinct art FROM ArticuloNH as art inner join VarianteNH as var on art.ArticuloId = var.Articulo inner join ColorNH as color on var.Color = color.ColorId where color.Nombre = :p_color]]></query>
+		  <query name="ArticuloNHdameArticulosPorMaterialHQL"><![CDATA[select distinct art FROM ArticuloNH as art inner join ComposicionNH as comp on art.Composicion = comp.ComposicionId inner join PorcentajeNH as por on por.Composicion = comp.ComposicionId inner join MaterialNH as mat on por.Material = mat.Id where mat.Material = :p_material]]></query>
+		  <query name="ArticuloNHdameArticulosPorRangoPrecioHQL"><![CDATA[select art from ArticuloNH as art where art.Precio >= :p_precio_min and art.Precio <= :p_precio_max]]></query>
+		  <query name="ArticuloNHdameArticulosEnPromocionPorSexoHQL"><![CDATA[select art FROM ArticuloNH as art where art.Sexo = :p_sexo and art.Promocion = true]]></query>
+		  <query name="ArticuloNHdameVariantesHQL"><![CDATA[SELECT var FROM VarianteNH as var WHERE var.Articulo.ArticuloId = :p_articulo]]></query>
+		  <query name="ArticuloNHdameVariantesPorColorHQL"><![CDATA[SELECT var FROM VarianteNH as var WHERE var.Articulo.ArticuloId = :p_articulo and var.Color.ColorId = :p_color]]></query>
+		</hibernate-mapping>
+	

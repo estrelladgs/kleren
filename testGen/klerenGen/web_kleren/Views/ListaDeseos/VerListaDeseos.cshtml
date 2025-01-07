@@ -1,0 +1,49 @@
+﻿@model web_kleren.Models.ListaDeseosViewModel
+
+@{
+    ViewData["Title"] = "Mis favoritos | Kleren";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+}
+
+<!-- Cuerpo de la pagina principal -->
+<div class="container">
+
+    <main role="main" class="pb-3">
+        <div class="text-center">
+
+            @if (Model.Articulos.Count() > 0)
+            {
+                <h1 class="display-4 mt-2" id="tituloPagina">Lista de deseos de @Model.NombreRemitente</h1>
+            }
+            else
+            {
+                <h1 class="display-4 mt-2" id="tituloPagina">¡Vaya! La lista de deseos está vacía</h1>
+            }
+
+            
+            <div class="row" id="misFavoritos">
+                @foreach (var item in @Model.Articulos)
+                {
+                        @Html.Partial("_ArticuloVistaPrevia", item)
+                }
+            </div>
+        </div>
+    </main>
+</div>
+
+
+

@@ -1,0 +1,123 @@
+﻿@model IEnumerable<KlerenGen.ApplicationCore.EN.Kleren.ArticuloEN>
+@{
+    ViewData["Title"] = "Home Page";
+    UsuarioViewModel usuario = Context.Session.Get<UsuarioViewModel>("usuario");
+    string nombre = "";
+    bool estaLoggeado = usuario != null;
+    if (estaLoggeado)
+    {
+        nombre = usuario.Nombre;
+    }
+    if (estaLoggeado)
+    {
+        Layout = "~/Views/Shared/_LayoutRegistrado.cshtml";        
+    }
+    else
+    {
+       Layout = "~/Views/Shared/_Layout.cshtml";   
+    }
+}
+
+    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+
+    <ol class="carousel-indicators">
+        <li data-target="#carouselExampleFade" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselExampleFade" data-slide-to="1"></li>
+        <li data-target="#carouselExampleFade" data-slide-to="2"></li>
+    </ol>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="./1.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="./2.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="./3.png" class="d-block w-100" alt="...">
+        </div>
+      </div>
+</div>
+
+
+    <aside class="d-flex justify-content-end pb-1 me-5 ms-5">
+        <form class="d-flex align-items-center gap-2 w-md-50 w-lg-25 my-2">
+            <input class="form-control flex-grow-1" type="text" placeholder="Busca por nombre">
+            <button class="btn btn-secondary d-inline-flex align-items-center" type="submit">
+                <i class="fas fa-search me-1"></i>
+                <span class="d-inline">Buscar</span>
+            </button>
+        </form>
+    </aside>
+
+    <div class="container">
+        <main role="main" class="pb-3">
+<div class="text-center">
+    @if (estaLoggeado)
+    {
+        <h1 class="display-4">¡Hola, @nombre! Seguro que te encantan</h1>
+    } else
+    {
+        <h1 class="display-4">¡Hola! Seguro que te encantan</h1>
+    }
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Nombre)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Precio_oferta)
+                </th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+
+        <tbody>
+    <div class="row">
+            @foreach (var item in Model)
+            {
+                    <!-- Primera tarjeta -->
+                    <div class="col-md-6 col-lg-4 mb-3">
+                        <div class="card">
+                            <img src="https://static.bershka.net/assets/public/9c17/4244/9ae9411b9902/d06cd425f699/05603360712-a3f/05603360712-a3f.jpg?ts=1725545296048&w=800" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Nombre)</h5>
+                                @if (item.Precio_oferta != 0.0)
+                                {
+                                    <div class="d-flex flex-column justify-content-center align-items-center">
+                                        <div class="d-flex align-items-baseline">
+                                            <p class="card-text me-2 text-decoration-line-through">
+                                                @Html.DisplayFor(modelItem => item.Precio) €
+                                            </p>
+                                            <p class="card-text text-danger fw-bold">
+                                                @Html.DisplayFor(modelItem => item.Precio_oferta) €
+                                            </p>
+                                        </div>
+                                    </div>
+                                }else
+                                {
+                                    <p class="card-text">@Html.DisplayFor(modelItem => item.Precio) €</p>
+                                }
+
+                                <div class="d-inline">
+                                    <form asp-action="LinPed" method="post">
+                                        <input type="hidden" name="idArticulo" value="@item.ArticuloId" />
+                                        <button type="submit" class="btn btn-primary">Añadir a la cesta</button>
+                                        <input type="hidden" name="idArticulo" value="@item.ArticuloId" />
+                                        <button type="submit" class="btn btn-secondary"><i class="fas fa-heart"></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+               
+            }
+    </div>
+</div>
+        </main>
+    </div>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+		<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2"
+		                   assembly="KlerenGen.Infraestructure"
+		                   namespace="KlerenGen.Infraestructure.EN.Kleren">
+		    
+		    
+			
+				<class name="CuidadoNH" table="Cuidado"> 
+				  	
+						<id name="CuiadoId" column="cuiadoId" type="integer"> 
+							<generator class="hilo"/>
+						</id>
+			
+					
+					<property name="Nombre" type="string"> 
+						<column name="nombre"  not-null="true"/>
+					</property>
+			
+			
+			
+			
+		  			
+						<bag name="Articulos" table="[articulo_cuidado]" inverse="true" >
+							<key>
+								
+									<column name="FK_cuiadoId_idCuidado"/> 
+							</key>
+      						<many-to-many class="KlerenGen.Infraestructure.EN.Kleren.ArticuloNH">
+									<column name="FK_articuloId_idArticulo"/> 
+      						</many-to-many>
+    					</bag>
+					
+					
+					
+		
+		 </class>	
+		  
+		  <query name="CuidadoNHReadAllHQL">from CuidadoNH</query>
+		</hibernate-mapping>
+	
